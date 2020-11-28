@@ -1,0 +1,6 @@
+matplotlib==3.3.2
+image-slicer==0.3.0
+stegano==0.9.8
+Pillow==6.2.2
+numpy==1.19.2
+SciPy==1.5.4
