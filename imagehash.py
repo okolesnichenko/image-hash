@@ -2,6 +2,7 @@ from __future__ import (absolute_import, division, print_function)
 
 from PIL import Image
 import numpy
+import zlib
 
 
 def _binary_array_to_hex(arr):
@@ -29,3 +30,6 @@ def phash_simple(image, hash_size=8, highfreq_factor=4):
     avg = dctlowfreq.mean()
     diff = dctlowfreq > avg
     return ImageHash(diff)
+
+def compress_message(msg):
+    zlib.compress(msg.hash)

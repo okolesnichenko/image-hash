@@ -24,8 +24,8 @@ def perform(original_image_path, changed_image_path):
     original_image = Image.open(original_image_path)
     changed_image = Image.open(changed_image_path)
     w, h = original_image.size
-    tile_size = 64
-    hash_length = 64
+    tile_size = 16
+    hash_length = 16
     threshold = hash_length * 0.15
     column, row = count_tiles_size(w, h, tile_size)
 
@@ -37,7 +37,9 @@ def perform(original_image_path, changed_image_path):
     for original_tile, changed_tile in zip(original_tiles, changed_tiles):
         # Получаем хеш блока
         original_hash = imagehash.phash_simple(original_tile.image)
+        imagehash.compress_message(original_hash)
         changed_hash = imagehash.phash_simple(changed_tile.image)
+        imagehash.compress_message(changed_hash)
 
         # Прям хеш методом наименее значащего бита
         original_tile.image = lsb.hide(original_tile.image, str(original_hash))
